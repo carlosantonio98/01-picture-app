@@ -1,19 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getPictures } from '../helpers/getPictures';
+import { useFetchPictures } from '../hooks/useFetchPictures';
 import { PictureItem } from './PictureItem';
 
 export const GridPicture = ({ category }) => {
 
-    const [images, setImages] = useState([]);
-
-    const getImages = async () => {
-        const newImages = await getPictures( category );
-        setImages( newImages );
-    }
-
-    useEffect(() => {
-        getImages();
-    }, []);
+    const { images, isLoading } = useFetchPictures( category );
 
     return(
         <div>
